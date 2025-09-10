@@ -8,7 +8,8 @@ app.get('/', (req, res) => {
         person: [
             {age: 18},
             {name: "Joe"},
-            {gender: "male"}
+            {gender: "male"},
+            {occupation:"student"}
         ]
     };
     const xmlData = xml(data);
