@@ -5,12 +5,20 @@ export const root = {
   random() {
     return Math.random();
   },
-  rollDices(args) {
+  rollDices({quantity}) {
     let result = [];
-    for(let i=0;i<args.quantity;i++) {
+    for(let i=0;i<quantity;i++) {
       let val = 1 + Math.floor(Math.random() * 6);
       result[i] = val;
     }
     return result;
   },
+  person: () => ({
+    teste({value}) {
+      return value;
+    },
+    maisUmTeste({value}) {
+      return value+1;
+    }
+  })
 };
