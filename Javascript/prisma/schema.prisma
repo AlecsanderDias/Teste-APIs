@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "./generated/prisma"
 }
 
 datasource db {
@@ -9,62 +9,62 @@ datasource db {
 }
 
 model Users {
-  id Int @id @default(autoincrement())
-  name String
-  surname String
-  user_name String
+  id         Int        @id @default(autoincrement())
+  name       String
+  surname    String
+  user_name  String
   birth_date DateTime
-  gender String
+  gender     String
   is_premium Boolean
-  email String @unique
-  password String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  email      String     @unique
+  password   String
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
   deleted_at DateTime
-  posts Posts[]
-  comments Comments[]
-  likes Likes[]
-  followers Follows[] @relation("Followers")
-  followed Follows[] @relation("Followed") 
+  posts      Posts[]
+  comments   Comments[]
+  likes      Likes[]
+  followers  Follows[]  @relation("Followers")
+  followed   Follows[]  @relation("Followed")
 }
 
 model Posts {
-  id Int @id @default(autoincrement())
-  content String
-  tags String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id         Int        @id @default(autoincrement())
+  content    String
+  tags       String
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
   deleted_at DateTime
-  userId Int
-  user Users @relation(fields: [userId], references: [id])
-  comments Comments[]
-  likes Likes[]
+  userId     Int
+  user       Users      @relation(fields: [userId], references: [id])
+  comments   Comments[]
+  likes      Likes[]
 }
 
 model Comments {
-  id Int @id @default(autoincrement())
-  content String
+  id         Int      @id @default(autoincrement())
+  content    String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   deleted_at DateTime
-  userId Int
-  postId Int
-  user Users @relation(fields: [userId], references: [id])
-  post Posts @relation(fields: [postId], references: [id])
+  userId     Int
+  postId     Int
+  user       Users    @relation(fields: [userId], references: [id])
+  post       Posts    @relation(fields: [postId], references: [id])
 }
 
 model Likes {
-  id Int @id @default(autoincrement())
+  id     Int   @id @default(autoincrement())
   postId Int
   userId Int
-  post Posts @relation(fields: [postId], references: [id])
-  user Users @relation(fields: [userId], references: [id])
+  post   Posts @relation(fields: [postId], references: [id])
+  user   Users @relation(fields: [userId], references: [id])
 }
 
 model Follows {
-  id Int @id @default(autoincrement())
+  id         Int   @id @default(autoincrement())
   followerId Int
   followedId Int
-  follower Users @relation("Followers", fields: [followerId], references: [id])
-  followed Users @relation("Followed", fields: [followedId], references: [id])
+  follower   Users @relation("Followers", fields: [followerId], references: [id])
+  followed   Users @relation("Followed", fields: [followedId], references: [id])
 }
