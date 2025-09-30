@@ -2,22 +2,22 @@ import { prisma } from '../../prisma/prisma.js';
 
 export class UserService {
     async getUsers() {
-        return prisma.user.findMany();
+        return await prisma.users.findMany();
     }
 
     async getUserById(id) {
-        return prisma.user.findunique({where: {id}});
+        return await prisma.users.findUnique({where: {id}});
     }
 
     async createUser(data) {
-        return prisma.user.create({data});
+        return await prisma.users.create({data});
     }
 
     async updateUserById(id, data) {
-        return prisma.user.update({where: {id}, data});
+        return await prisma.users.update({where: {id}, data});
     }
 
     async deleteUserById(id) {
-        return prisma.user.delete({where: {id}});
+        return await prisma.users.delete({where: {id}});
     }
 }
