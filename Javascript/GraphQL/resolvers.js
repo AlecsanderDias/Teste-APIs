@@ -1,24 +1,21 @@
+import { UserService } from "./Services/userService.js";
+
+const userService = new UserService();
+
 export const root = {
-  quoteOfTheDay() {
-    return Math.random() < 0.5 ? 'Take it easy' : 'Salvation lies within';
-  },
-  random() {
-    return Math.random();
-  },
-  rollDices({quantity}) {
-    let result = [];
-    for(let i=0;i<quantity;i++) {
-      let val = 1 + Math.floor(Math.random() * 6);
-      result[i] = val;
-    }
-    return result;
-  },
-  person: () => ({
-    teste({value}) {
-      return value;
+  Query: {
+    user: async ({id}) => {
+      const user = await userService.getUserById(id);
+      console.log(user);
+      return user;
     },
-    maisUmTeste({value}) {
-      return value+1;
-    }
-  })
+    users: async () => {
+      const users = await userService.getUsers();
+      console.log(users);
+      return users;
+    },
+  },
+  Mutation: {
+
+  }
 };
