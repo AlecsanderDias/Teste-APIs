@@ -13,11 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server": "^5.0.0",
     "@prisma/client": "^6.16.2",
     "express": "^5.1.0",
-    "express-graphql": "^0.12.0",
     "graphql": "^16.11.0",
-    "graphql-http": "^1.22.4",
     "xml": "^1.0.1"
   },
   "devDependencies": {
