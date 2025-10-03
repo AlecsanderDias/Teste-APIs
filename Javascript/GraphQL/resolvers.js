@@ -19,7 +19,7 @@ export const resolvers = {
   },
   Mutation: {
     createUser: (parent, args) => {
-      return service.userService.createUser({args});
+      return service.userService.createUser({...args});
     }
   }
 };

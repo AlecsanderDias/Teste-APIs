@@ -18,7 +18,7 @@ export class UserService {
     }
 
     async createUser(data) {
-        return await this.prisma.users.create({data});
+        return await this.prisma.users.create({data: data});
     }
 
     async updateUserById(id, data) {
