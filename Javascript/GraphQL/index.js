@@ -1,27 +1,3 @@
-// import express from 'express';
-// import { createHandler } from 'graphql-http/lib/use/express';
-// import { root } from './resolvers.js';
-// import { schema } from './schema.js';
-// import { graphqlHTTP } from 'express-graphql';
-// import { UserService } from './Services/userService.js';
-
-
-// const PORT = 4000;
-
-// const app = express();
-
-// app.use(
-//   '/graphql',
-//   graphqlHTTP({
-//     schema: schema,
-//     rootValue: root,
-//   }),
-// );
-
-// app.listen(PORT, () => {
-//   console.log(`Running a GraphQL API server at localhost:${PORT}/graphql`);
-// });
-
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import fs from 'fs';
