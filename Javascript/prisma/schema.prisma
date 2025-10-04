@@ -19,7 +19,7 @@ model Users {
   email      String     @unique
   password   String
   created_at DateTime   @default(now())
-  updated_at DateTime?   @updatedAt
+  updated_at DateTime?  @updatedAt
   deleted_at DateTime?
   posts      Posts[]
   comments   Comments[]
@@ -33,7 +33,7 @@ model Posts {
   content    String
   tags       String
   created_at DateTime   @default(now())
-  updated_at DateTime?   @updatedAt
+  updated_at DateTime?  @updatedAt
   deleted_at DateTime?
   userId     Int
   user       Users      @relation(fields: [userId], references: [id])
