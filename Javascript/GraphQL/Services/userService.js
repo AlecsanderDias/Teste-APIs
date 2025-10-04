@@ -22,10 +22,11 @@ export class UserService {
     }
 
     async updateUserById(id, data) {
-        return await this.prisma.users.update({where: {id}, data});
+        delete data.id;
+        return await this.prisma.users.update({where: {id: id}, data: data});
     }
 
     async deleteUserById(id) {
-        return await this.prisma.users.delete({where: {id}});
+        return await this.prisma.users.delete({where: {id:id}});
     }
 }
