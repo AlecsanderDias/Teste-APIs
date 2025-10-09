@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package system;
+
+service Data {
+    rpc GetUser (RequestUser) returns (ResponseUser) {}
+}
+
+message User {
+    int32 id = 1;
+    string name = 2;
+    string surname = 3;
+    string user_name = 4;
+    string birth_data = 5;
+    string gender = 6;
+    bool is_premium = 7;
+    string email = 8;
+    string password = 9;
+    string created_at = 10;
+    string updated_at = 11;
+    string deleted_at = 12;
+}
+
+message RequestUser {
+    int32 id = 1;
+}
+
+message ResponseUser {
+    repeated User users = 1;
+}
