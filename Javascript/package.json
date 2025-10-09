@@ -7,13 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "graph": "nodemon graphql",
     "rest": "nodemon rest",
-    "soap": "nodemon soap"
+    "soap": "nodemon soap",
+    "grpc": "nodemon ./grpc/server.js",
+    "grpc-client": "nodemon ./grpc/client.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^5.0.0",
+    "@grpc/grpc-js": "^1.14.0",
+    "@grpc/proto-loader": "^0.8.0",
     "@prisma/client": "^6.16.2",
     "cors": "^2.8.5",
     "express": "^5.1.0",
