@@ -3,7 +3,11 @@ syntax = "proto3";
 package system;
 
 service Data {
-    rpc GetUser (RequestUser) returns (ResponseUser) {}
+    rpc GetUser (RequestUser) returns (User) {};
+    rpc GetUsers (RequestUsers) returns (ResponseUsers) {};
+    rpc CreateUser (UserCreate) returns (User) {}
+    rpc UpdateUser (UserUpdate) returns (User) {}
+    rpc DeleteUser (RequestUser) returns (User) {}
 }
 
 message User {
@@ -11,7 +15,7 @@ message User {
     string name = 2;
     string surname = 3;
     string user_name = 4;
-    string birth_data = 5;
+    string birth_date = 5;
     string gender = 6;
     bool is_premium = 7;
     string email = 8;
@@ -25,6 +29,31 @@ message RequestUser {
     int32 id = 1;
 }
 
-message ResponseUser {
+message RequestUsers {}
+
+message ResponseUsers {
     repeated User users = 1;
+}
+
+message UserCreate {
+    string name = 2;
+    string surname = 3;
+    string user_name = 4;
+    string birth_date = 5;
+    string gender = 6;
+    bool is_premium = 7;
+    string email = 8;
+    string password = 9;
+}
+
+message UserUpdate {
+    int32 id = 1;
+    optional string name = 2;
+    optional string surname = 3;
+    optional string user_name = 4;
+    optional string birth_date = 5;
+    optional string gender = 6;
+    optional bool is_premium = 7;
+    optional string email = 8;
+    optional string password = 9;
 }
