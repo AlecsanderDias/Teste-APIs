@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+service LikeService {
+    rpc GetLike (LikeRequest) returns (Like);
+    rpc GetLikes (LikesRequest) returns (LikesResponse);
+    rpc CreateLike (LikeCreate) returns (Like);
+    rpc UpdateLike (LikeUpdate) returns (Like);
+    rpc DeleteUser (LikeDelete) returns (Like);
+}
+
+message Like {
+    int32 id = 1;
+    int32 postId = 2;
+    int32 userId = 3;
+}
+
+message LikeRequest {
+    int32 id = 1;
+}
+
+message LikesRequest {}
+
+message LikesResponse {
+    repeated Like posts = 1;
+}
+
+message LikeCreate {
+    int32 postId = 1;
+    int32 userId = 2;
+}
+
+message LikeUpdate {
+    int32 id = 1;
+    optional int32 postId = 2;
+    optional int32 userId = 3;
+}
+
+message LikeDelete {
+    int32 id = 1;
+}

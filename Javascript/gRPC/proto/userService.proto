@@ -1,13 +1,18 @@
 syntax = "proto3";
 
-package system;
+package user;
 
-service Data {
-    rpc GetUser (RequestUser) returns (User) {};
-    rpc GetUsers (RequestUsers) returns (ResponseUsers) {};
+import "postService.proto";
+import "likeService.proto";
+import "followService.proto";
+import "commentService.proto";
+
+service UserService {
+    rpc GetUser (UserRequest) returns (User) {};
+    rpc GetUsers (UsersRequest) returns (UsersResponse) {};
     rpc CreateUser (UserCreate) returns (User) {}
     rpc UpdateUser (UserUpdate) returns (User) {}
-    rpc DeleteUser (RequestUser) returns (User) {}
+    rpc DeleteUser (UserDelete) returns (User) {}
 }
 
 message User {
@@ -25,13 +30,13 @@ message User {
     string deleted_at = 12;
 }
 
-message RequestUser {
+message UserRequest {
     int32 id = 1;
 }
 
-message RequestUsers {}
+message UsersRequest {}
 
-message ResponseUsers {
+message UsersResponse {
     repeated User users = 1;
 }
 
@@ -56,4 +61,8 @@ message UserUpdate {
     optional bool is_premium = 7;
     optional string email = 8;
     optional string password = 9;
+}
+
+message UserDelete {
+    int32 id = 1;
 }

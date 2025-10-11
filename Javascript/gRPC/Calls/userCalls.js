@@ -1,4 +1,4 @@
-import { service } from './Services/services.js';
+import { service } from '../Services/services.js';
 
 export const userCalls = {
     GetUser: async function(call, callback) {
@@ -25,7 +25,6 @@ export const userCalls = {
     },
     DeleteUser: async function(call, callback) {
         const { id } = call.request;
-        // console.log("Delete =>", id);
         const result = await service.userService.deleteUserById(id);
         callback(null, result);
     }
