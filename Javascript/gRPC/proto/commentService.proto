@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+service CommentService {
+    rpc GetComment (CommentRequest) returns (Comment);
+    rpc GetComments (CommentsRequest) returns (CommentsResponse);
+    rpc CreateComment (CommentCreate) returns (Comment);
+    rpc UpdateComment (CommentUpdate) returns (Comment);
+    rpc DeleteUser (CommentDelete) returns (Comment);
+}
+
+message Comment {
+    int32 id = 1;
+    string content = 2;
+    string created_at = 3;
+    string updated_at = 4;
+    string deleted_at = 5;
+    int32 userId = 6;
+    int32 postId = 7;
+}
+
+message CommentRequest {
+    int32 id = 1;
+}
+
+message CommentsRequest {}
+
+message CommentsResponse {
+    repeated Comment posts = 1;
+}
+
+message CommentCreate {
+    string content = 1;
+    int32 userId = 2;
+    int32 postId = 3;
+}
+
+message CommentUpdate {
+    int32 id = 1;
+    optional string content = 2;
+    optional int32 userId = 3;
+    optional int32 postId = 4;
+}
+
+message CommentDelete {
+    int32 id = 1;
+}

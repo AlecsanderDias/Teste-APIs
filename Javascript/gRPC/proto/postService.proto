@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package post;
+
+service PostService {
+    rpc GetPost (PostRequest) returns (Post);
+    rpc GetPosts (PostsRequest) returns (PostsResponse);
+    rpc CreatePost (PostCreate) returns (Post);
+    rpc UpdatePost (PostUpdate) returns (Post);
+    rpc DeleteUser (PostDelete) returns (Post);
+}
+
+message Post {
+    int32 id = 1;
+    string content = 2;
+    string tags = 3;
+    string created_at = 4;
+    string updated_at = 5;
+    string deleted_at = 6;
+    int32 userId = 7;
+}
+
+message PostRequest {
+    int32 id = 1;
+}
+
+message PostsRequest {}
+
+message PostsResponse {
+    repeated Post posts = 1;
+}
+
+message PostCreate {
+    string content = 1;
+    string tags = 2;
+    int32 userId = 3;
+}
+
+message PostUpdate {
+    int32 id = 1;
+    optional string content = 2;
+    optional string tags = 3;
+    optional int32 userId = 4;
+}
+
+message PostDelete {
+    int32 id = 1;
+}
