@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package follow;
+
 service FollowService {
     rpc GetFollow (FollowRequest) returns (Follow);
     rpc GetFollows (FollowsRequest) returns (FollowsResponse);

@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package like;
+
 service LikeService {
     rpc GetLike (LikeRequest) returns (Like);
     rpc GetLikes (LikesRequest) returns (LikesResponse);
