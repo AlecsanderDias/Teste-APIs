@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package comment;
+
 service CommentService {
     rpc GetComment (CommentRequest) returns (Comment);
     rpc GetComments (CommentsRequest) returns (CommentsResponse);

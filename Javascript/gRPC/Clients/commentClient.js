@@ -1,13 +1,13 @@
 import grpc from '@grpc/grpc-js';
 import protoloader from '@grpc/proto-loader';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { getProtoFilePath } from '../protofileName.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const protoFileName = "userService";
+const protoFilePath = getProtoFilePath(protoFileName);
 
-const protoFile = __dirname + '/proto/userService.proto';
-const packageDefinition = protoloader.loadSync(protoFile, {
+console.log("Client => ", protoFilePath);
+
+const packageDefinition = protoloader.loadSync(protoFilePath, {
   keepCase: true,
   longs: String,
   enums: String,
@@ -71,15 +71,6 @@ function main() {
     //     };
     //     console.log("Resultado DeleteUsers =>", response);
     // });
-
-    // Posts
-    client.getPosts({id: 3}, (err, response) => {
-        if(err) {
-            console.error('Error:', err);
-            return;
-        };
-        console.log("Resultado GetPosts =>", response);
-    });
 }
 
 main();

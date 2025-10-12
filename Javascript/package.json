@@ -9,7 +9,11 @@
     "rest": "nodemon rest",
     "soap": "nodemon soap",
     "grpc": "nodemon ./grpc/server.js",
-    "grpc-client": "nodemon ./grpc/client.js"
+    "grpc-user": "nodemon ./grpc/clients/userClient.js",
+    "grpc-post": "nodemon ./grpc/clients/userClient.js",
+    "grpc-like": "nodemon ./grpc/clients/userClient.js",
+    "grpc-follow": "nodemon ./grpc/clients/userClient.js",
+    "grpc-comment": "nodemon ./grpc/clients/userClient.js"
   },
   "keywords": [],
   "author": "",

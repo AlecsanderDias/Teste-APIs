@@ -2,11 +2,6 @@ syntax = "proto3";
 
 package user;
 
-import "postService.proto";
-import "likeService.proto";
-import "followService.proto";
-import "commentService.proto";
-
 service UserService {
     rpc GetUser (UserRequest) returns (User) {};
     rpc GetUsers (UsersRequest) returns (UsersResponse) {};
