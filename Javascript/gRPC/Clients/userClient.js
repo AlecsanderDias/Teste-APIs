@@ -1,24 +1,8 @@
 import grpc from '@grpc/grpc-js';
-import protoloader from '@grpc/proto-loader';
-import { getProtoFilePath } from '../protofileName.js';
-
-const protoFileName = "userService";
-const protoFilePath = getProtoFilePath(protoFileName);
-
-console.log("Client => ", protoFilePath);
-
-const packageDefinition = protoloader.loadSync(protoFilePath, {
-  keepCase: true,
-  longs: String,
-  enums: String,
-  defaults: true,
-  oneofs: true,
-});
-
-const userService = grpc.loadPackageDefinition(packageDefinition).user;
+import { grpcServices } from '../grpcServices.js';
 
 function main() {
-    const client = new userService.UserService('localhost:50051', grpc.credentials. createInsecure());
+    const client = new grpcServices.user.userService.UserService('localhost:50051', grpc.credentials. createInsecure());
 
     client.getUser({id: 1}, (err, response) => {
         if(err) {

@@ -1,40 +1,25 @@
 import grpc from '@grpc/grpc-js';
-import protoloader from '@grpc/proto-loader';
-import { getProtoFilePath } from '../protofileName.js';
-
-const protoFileName = "userService";
-const protoFilePath = getProtoFilePath(protoFileName);
-
-console.log("Client => ", protoFilePath);
-
-const packageDefinition = protoloader.loadSync(protoFilePath, {
-  keepCase: true,
-  longs: String,
-  enums: String,
-  defaults: true,
-  oneofs: true,
-});
-
-const userService = grpc.loadPackageDefinition(packageDefinition).user;
+import { grpcServices } from '../grpcServices.js';
 
 function main() {
-    const client = new userService.UserService('localhost:50051', grpc.credentials. createInsecure());
 
-    client.getUser({id: 1}, (err, response) => {
+    const client = new grpcServices.comment.commentService.CommentService('localhost:50051', grpc.credentials. createInsecure());
+
+    client.getComment({id: 1}, (err, response) => {
         if(err) {
             console.error('Error:', err);
             return;
         };
-        console.log("Resultado GetUser =>", response);
+        console.log("Resultado GetComment =>", response);
     });
-    client.getUsers({} , (err, response) => {
+    client.getComments({} , (err, response) => {
         if(err) {
             console.error('Error:', err);
             return;
         };
-        console.log("Resultado GetUsers =>", response);
+        console.log("Resultado GetComments =>", response);
     });
-    let newUser = {
+    let newComment = {
         name: "Remote",
         surname: "Procedure Call",
         user_name: "grpc",
@@ -44,32 +29,32 @@ function main() {
         email: "grpc@teste.teste",
         password: "teste",
     };
-    // client.createUser(newUser, (err, response) => {
+    // client.createComment(newComment, (err, response) => {
     //     if(err) {
     //         console.error('Error:', err);
     //         return;
     //     };
-    //     console.log("Resultado CreateUsers =>", response);
+    //     console.log("Resultado CreateComments =>", response);
     // });
-    // let updatedUser = {
+    // let updatedComment = {
     //     id: 7,
     //     name: "Teste GRPC",
     //     is_premium: true,
     // };
-    // client.updateUser(updatedUser, (err, response) => {
+    // client.updateComment(updatedComment, (err, response) => {
     //     if(err) {
     //         console.error('Error:', err);
     //         return;
     //     };
-    //     console.log("Resultado UpdateUsers =>", response);
+    //     console.log("Resultado UpdateComments =>", response);
     // });
     let deleteId = 9;
-    // client.deleteUser({id: deleteId}, (err, response) => {
+    // client.deleteComment({id: deleteId}, (err, response) => {
     //     if(err) {
     //         console.error('Error:', err);
     //         return;
     //     };
-    //     console.log("Resultado DeleteUsers =>", response);
+    //     console.log("Resultado DeleteComments =>", response);
     // });
 }
 

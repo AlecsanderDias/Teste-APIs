@@ -1,40 +1,24 @@
 import grpc from '@grpc/grpc-js';
-import protoloader from '@grpc/proto-loader';
-import { getProtoFilePath } from '../protofileName.js';
-
-const protoFileName = "userService";
-const protoFilePath = getProtoFilePath(protoFileName);
-
-console.log("Client => ", protoFilePath);
-
-const packageDefinition = protoloader.loadSync(protoFilePath, {
-  keepCase: true,
-  longs: String,
-  enums: String,
-  defaults: true,
-  oneofs: true,
-});
-
-const userService = grpc.loadPackageDefinition(packageDefinition).user;
+import { grpcServices } from '../grpcServices.js';
 
 function main() {
-    const client = new userService.UserService('localhost:50051', grpc.credentials. createInsecure());
+    const client = new grpcServices.post.postService.PostService('localhost:50051', grpc.credentials.createInsecure());
 
-    client.getUser({id: 1}, (err, response) => {
+    client.getPost({id: 3}, (err, response) => {
         if(err) {
             console.error('Error:', err);
             return;
         };
-        console.log("Resultado GetUser =>", response);
+        console.log("Resultado GetPost =>", response);
     });
-    client.getUsers({} , (err, response) => {
+    client.getPosts({} , (err, response) => {
         if(err) {
             console.error('Error:', err);
             return;
         };
-        console.log("Resultado GetUsers =>", response);
+        console.log("Resultado GetPosts =>", response);
     });
-    let newUser = {
+    let newPost = {
         name: "Remote",
         surname: "Procedure Call",
         user_name: "grpc",
@@ -44,32 +28,32 @@ function main() {
         email: "grpc@teste.teste",
         password: "teste",
     };
-    // client.createUser(newUser, (err, response) => {
+    // client.createPost(newPost, (err, response) => {
     //     if(err) {
     //         console.error('Error:', err);
     //         return;
     //     };
-    //     console.log("Resultado CreateUsers =>", response);
+    //     console.log("Resultado CreatePosts =>", response);
     // });
-    // let updatedUser = {
+    // let updatedPost = {
     //     id: 7,
     //     name: "Teste GRPC",
     //     is_premium: true,
     // };
-    // client.updateUser(updatedUser, (err, response) => {
+    // client.updatePost(updatedPost, (err, response) => {
     //     if(err) {
     //         console.error('Error:', err);
     //         return;
     //     };
-    //     console.log("Resultado UpdateUsers =>", response);
+    //     console.log("Resultado UpdatePosts =>", response);
     // });
     let deleteId = 9;
-    // client.deleteUser({id: deleteId}, (err, response) => {
+    // client.deletePost({id: deleteId}, (err, response) => {
     //     if(err) {
     //         console.error('Error:', err);
     //         return;
     //     };
-    //     console.log("Resultado DeleteUsers =>", response);
+    //     console.log("Resultado DeletePosts =>", response);
     // });
 }
 

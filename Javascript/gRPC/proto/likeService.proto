@@ -23,7 +23,7 @@ message LikeRequest {
 message LikesRequest {}
 
 message LikesResponse {
-    repeated Like posts = 1;
+    repeated Like likes = 1;
 }
 
 message LikeCreate {

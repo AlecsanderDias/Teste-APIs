@@ -23,7 +23,7 @@ message FollowRequest {
 message FollowsRequest {}
 
 message FollowsResponse {
-    repeated Follow posts = 1;
+    repeated Follow follows = 1;
 }
 
 message FollowCreate {

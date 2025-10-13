@@ -27,7 +27,7 @@ message CommentRequest {
 message CommentsRequest {}
 
 message CommentsResponse {
-    repeated Comment posts = 1;
+    repeated Comment comments = 1;
 }
 
 message CommentCreate {
