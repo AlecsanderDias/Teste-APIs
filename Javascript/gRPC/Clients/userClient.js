@@ -21,11 +21,11 @@ function main() {
     let newUser = {
         name: "Remote",
         surname: "Procedure Call",
-        user_name: "grpc",
+        user_name: "grpcTeste",
         birth_date: new Date().toISOString(),
         gender: "m",
         is_premium: false,
-        email: "grpc@teste.teste",
+        email: "grpc.teste@teste.teste",
         password: "teste",
     };
     // client.createUser(newUser, (err, response) => {

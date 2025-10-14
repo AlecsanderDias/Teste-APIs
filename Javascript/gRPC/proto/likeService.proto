@@ -7,7 +7,7 @@ service LikeService {
     rpc GetLikes (LikesRequest) returns (LikesResponse);
     rpc CreateLike (LikeCreate) returns (Like);
     rpc UpdateLike (LikeUpdate) returns (Like);
-    rpc DeleteUser (LikeDelete) returns (Like);
+    rpc DeleteLike (LikeDelete) returns (Like);
 }
 
 message Like {

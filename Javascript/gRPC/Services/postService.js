@@ -14,18 +14,18 @@ export class PostService {
     }
 
     async getPostById(id) {
-        return await this.prisma.posts.findUnique({ where: {id}});
+        return await this.prisma.posts.findUnique({ where: {id:id}});
     }
 
     async createPost(data) {
-        return await this.prisma.posts.create({data});
+        return await this.prisma.posts.create({data: data});
     }
 
     async updatePostById(id, data) {
-        return await this.prisma.posts.update({where: {id}, data});
+        return await this.prisma.posts.update({where: {id:id}, data:data});
     }
 
     async deletePostById(id) {
-        return await this.prisma.posts.delete({where: {id}});
+        return await this.prisma.posts.delete({where: {id:id}});
     }
 }

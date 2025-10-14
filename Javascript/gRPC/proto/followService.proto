@@ -7,7 +7,7 @@ service FollowService {
     rpc GetFollows (FollowsRequest) returns (FollowsResponse);
     rpc CreateFollow (FollowCreate) returns (Follow);
     rpc UpdateFollow (FollowUpdate) returns (Follow);
-    rpc DeleteUser (FollowDelete) returns (Follow);
+    rpc DeleteFollow (FollowDelete) returns (Follow);
 }
 
 message Follow {
@@ -27,16 +27,14 @@ message FollowsResponse {
 }
 
 message FollowCreate {
-    string content = 1;
-    string tags = 2;
-    int32 userId = 3;
+    int32 followerId = 1;
+    int32 followedId = 2;
 }
 
 message FollowUpdate {
     int32 id = 1;
-    optional string content = 2;
-    optional string tags = 3;
-    optional int32 userId = 4;
+    optional int32 followerId = 2;
+    optional int32 followedId = 3;
 }
 
 message FollowDelete {

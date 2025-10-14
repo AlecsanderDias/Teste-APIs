@@ -19,34 +19,29 @@ function main() {
         console.log("Resultado GetPosts =>", response);
     });
     let newPost = {
-        name: "Remote",
-        surname: "Procedure Call",
-        user_name: "grpc",
-        birth_date: new Date().toISOString(),
-        gender: "m",
-        is_premium: false,
-        email: "grpc@teste.teste",
-        password: "teste",
+        content: "Remote",
+        tags: "Procedure Call",
+        userId: 3
     };
-    // client.createPost(newPost, (err, response) => {
-    //     if(err) {
-    //         console.error('Error:', err);
-    //         return;
-    //     };
-    //     console.log("Resultado CreatePosts =>", response);
-    // });
-    // let updatedPost = {
-    //     id: 7,
-    //     name: "Teste GRPC",
-    //     is_premium: true,
-    // };
-    // client.updatePost(updatedPost, (err, response) => {
-    //     if(err) {
-    //         console.error('Error:', err);
-    //         return;
-    //     };
-    //     console.log("Resultado UpdatePosts =>", response);
-    // });
+    client.createPost(newPost, (err, response) => {
+        if(err) {
+            console.error('Error:', err);
+            return;
+        };
+        console.log("Resultado CreatePosts =>", response);
+    });
+    let updatedPost = {
+        id: 7,
+        content: "Teste GRPC",
+        tags: "#teste #teste1",
+    };
+    client.updatePost(updatedPost, (err, response) => {
+        if(err) {
+            console.error('Error:', err);
+            return;
+        };
+        console.log("Resultado UpdatePosts =>", response);
+    });
     let deleteId = 9;
     // client.deletePost({id: deleteId}, (err, response) => {
     //     if(err) {

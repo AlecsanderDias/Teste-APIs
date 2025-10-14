@@ -7,7 +7,7 @@ service CommentService {
     rpc GetComments (CommentsRequest) returns (CommentsResponse);
     rpc CreateComment (CommentCreate) returns (Comment);
     rpc UpdateComment (CommentUpdate) returns (Comment);
-    rpc DeleteUser (CommentDelete) returns (Comment);
+    rpc DeleteComment (CommentDelete) returns (Comment);
 }
 
 message Comment {

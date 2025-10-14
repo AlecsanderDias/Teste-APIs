@@ -18,14 +18,14 @@ export class FollowService {
     }
 
     async createFollow(data) {
-        return await this.prisma.follows.create({data});
+        return await this.prisma.follows.create({data: data});
     }
 
     async updateFollowById(id, data) {
-        return await this.prisma.follows.update({where: {id}, data});
+        return await this.prisma.follows.update({where: {id:id}, data:data});
     }
 
     async deleteFollowById(id) {
-        return await this.prisma.follows.delete({where: {id}});
+        return await this.prisma.follows.delete({where: {id:id}});
     }
 }
