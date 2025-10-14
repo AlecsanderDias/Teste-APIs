@@ -20,34 +20,30 @@ function main() {
         console.log("Resultado GetComments =>", response);
     });
     let newComment = {
-        name: "Remote",
-        surname: "Procedure Call",
-        user_name: "grpc",
-        birth_date: new Date().toISOString(),
-        gender: "m",
-        is_premium: false,
-        email: "grpc@teste.teste",
-        password: "teste",
+        content: "Tesando Comentário",
+        userId: 2,
+        postId: 3
     };
-    // client.createComment(newComment, (err, response) => {
-    //     if(err) {
-    //         console.error('Error:', err);
-    //         return;
-    //     };
-    //     console.log("Resultado CreateComments =>", response);
-    // });
-    // let updatedComment = {
-    //     id: 7,
-    //     name: "Teste GRPC",
-    //     is_premium: true,
-    // };
-    // client.updateComment(updatedComment, (err, response) => {
-    //     if(err) {
-    //         console.error('Error:', err);
-    //         return;
-    //     };
-    //     console.log("Resultado UpdateComments =>", response);
-    // });
+    client.createComment(newComment, (err, response) => {
+        if(err) {
+            console.error('Error:', err);
+            return;
+        };
+        console.log("Resultado CreateComments =>", response);
+    });
+    let updatedComment = {
+        id: 4,
+        content: "Atualizando Comentário",
+        userId: 2,
+        postId: 3
+    };
+    client.updateComment(updatedComment, (err, response) => {
+        if(err) {
+            console.error('Error:', err);
+            return;
+        };
+        console.log("Resultado UpdateComments =>", response);
+    });
     let deleteId = 9;
     // client.deleteComment({id: deleteId}, (err, response) => {
     //     if(err) {

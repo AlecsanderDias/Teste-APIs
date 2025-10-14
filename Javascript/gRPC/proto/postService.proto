@@ -7,7 +7,7 @@ service PostService {
     rpc GetPosts (PostsRequest) returns (PostsResponse);
     rpc CreatePost (PostCreate) returns (Post);
     rpc UpdatePost (PostUpdate) returns (Post);
-    rpc DeleteUser (PostDelete) returns (Post);
+    rpc DeletePost (PostDelete) returns (Post);
 }
 
 message Post {

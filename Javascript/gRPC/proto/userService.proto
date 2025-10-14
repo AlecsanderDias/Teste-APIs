@@ -36,14 +36,14 @@ message UsersResponse {
 }
 
 message UserCreate {
-    string name = 2;
-    string surname = 3;
-    string user_name = 4;
-    string birth_date = 5;
-    string gender = 6;
-    bool is_premium = 7;
-    string email = 8;
-    string password = 9;
+    string name = 1;
+    string surname = 2;
+    string user_name = 3;
+    string birth_date = 4;
+    string gender = 5;
+    bool is_premium = 6;
+    string email = 7;
+    string password = 8;
 }
 
 message UserUpdate {
