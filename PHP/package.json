@@ -1,0 +1,12 @@
+{
+  "name": "php",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "php-rest": "php -S localhost:8080 -t ./rest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
