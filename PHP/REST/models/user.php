@@ -1,34 +1,34 @@
 <?php 
-class User {
 
-    private $db;
+namespace Models;
+use flight;
+
+class User {
     private string $name;
     private string $surname;
     private string $user_name;
-    private DateTime $birth_date;
+    private string $birth_date;
     private string $gender;
     private bool $is_premium;
     private string $email;
     private string $password;
-    private DateTime $created_at;
-    private DateTime $updated_at;
-    private DateTime $deleted_at;
+    private string $created_at;
+    private string $updated_at;
+    private string $deleted_at;
 
     public function __construct(
-        $db,
         string $name,
         string $surname,
         string $user_name,
-        DateTime $birth_date,
+        string $birth_date,
         string $gender,
         bool $is_premium,
         string $email,
         string $password,
-        DateTime $created_at,
-        DateTime $updated_at,
-        DateTime $deleted_at
+        string $created_at,
+        string $updated_at,
+        string $deleted_at
     ) {
-        $this->db = $db;
         $this->name = $name;
         $this->surname = $surname;
         $this->user_name = $user_name;
@@ -42,18 +42,13 @@ class User {
         $this->deleted_at = $deleted_at;
     }
 
-    public function getUsers() {
+    static function getUsers(): array {
         try {
             $users = Flight::db()->fetchAll("SELECT * FROM users;");
-            foreach ($users as $user) {
-                echo $user->name;
-            }
-            return Flight::json([
-                'message' => 'Grande sucesso',
-                'Resultado' => $users
-            ]);
+            return $users;
         } catch (\Throwable $th) {
             throw $th;
         }
+        return [];
     }
 }

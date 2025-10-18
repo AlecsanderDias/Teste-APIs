@@ -1,15 +1,20 @@
 <?php
 
 use flight\database\PdoWrapper;
+use Controllers\UserController;
 
 require './vendor/autoload.php';
-require './database/database.php';
+// require './database/database.php';
+
+// $controllerFolder = '//controllers//';
+Flight::path(__DIR__);
+
 
 $dir = dirname(__DIR__);
 $dotenv = Dotenv\Dotenv::createImmutable($dir);
 $dotenv->safeLoad();
 
-$connection = "mysql:host=" + $_ENV['DB_HOST']+ ";dbname="+ $_ENV['DB_DATABASE'];
+$connection = 'mysql:host='.$_ENV['DB_HOST'].';dbname='.$_ENV['DB_DATABASE'];
 $user = $_ENV['DB_USER'];
 $pass = $_ENV['DB_PASS'];
 
