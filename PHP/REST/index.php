@@ -39,6 +39,6 @@ Flight::register('db', PdoWrapper::class, [
 //     ]);
 // });
 
-Flight::resource('/user', UserController::class);
+Flight::resource('/users', UserController::class);
 
 Flight::start();
