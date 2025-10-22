@@ -23,19 +23,19 @@ class UserController {
     
     public function store(): void {
         $data = Flight::request()->data;
-        var_dump($data);
-        // UserService::createUser($data);
+        UserService::createUser([...$data]);
     }
 
     public function edit(string $id): void {
 
     }
 
-    public function update(string $id, array $data): void {
-        var_dump($id, $data);
+    public function update(string $id): void {
+        $data = Flight::request()->data;
+        UserService::updateUser((int)$id, [...$data]);
     }
 
-    public function delete(string $id): void {
+    public function destroy(string $id): void {
         $message = UserService::deleteUser((int)$id);
     }
 }

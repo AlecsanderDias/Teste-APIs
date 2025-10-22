@@ -28,15 +28,33 @@ class UserService {
     }
 
     static function createUser(array $data) {
-        $fields = "name, surname, user_name, birth_date, gender, is_premium, email, password";
-        $values = "?, ?, ?, ?, ?, ?, ?, ?";
+        $value = [];
+        $values = "";
+        $fields = "";
+        foreach($data as $key => $val) {
+            $value[] = $val;
+            $fields .= " $key,";
+            $values .= " ?,";
+        }
+        $fields[strlen($fields) - 1] = " ";
+        $values[strlen($values) - 1] = " ";
         $sql = "INSERT INTO users ($fields) VALUES ($values)";
-        var_dump($data, [...$data]);
+        // var_dump($sql, $value);
+        Flight::db()->runQuery($sql, $value);
     }
 
     static function updateUser(int $id, array $data) {
-        $fieldsAndValues = "";
-        $sql = "UPDATE users SET $fieldsAndValues WHERE id = ?";
+        $fields = "";
+        $values = [];
+        foreach ($data as $key => $value) {
+            $fields .= " $key = ?,";
+            $values[] = $value;
+        };
+        $values[] = $id;
+        $fields[strlen($fields) - 1] = " ";
+        $sql = "UPDATE users SET $fields WHERE id = ?";
+        // var_dump($sql, $values);
+        Flight::db()->runQuery($sql, $values);
     }
 
     static function deleteUser(int $id) {
