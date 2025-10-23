@@ -39,6 +39,6 @@ Flight::register('db', PdoWrapper::class, [
 //     ]);
 // });
 
-Flight::resource('/users', UserController::class);
+Flight::resource('/users', UserController::class, ['except' => ['create', 'edit']]);
 
 Flight::start();
