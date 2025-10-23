@@ -2,29 +2,33 @@
 
 namespace Services;
 
+use Exception;
 use flight;
 
 class UserService {
-    static function getUsers(): array {
+    static function getUsers() {
         $sql = "SELECT * FROM users";
         try {
-            $users = Flight::db()->fetchAll($sql);
-            return $users;
-        } catch (\Throwable $th) {
-            throw $th;
+            $result = Flight::db()->fetchAll($sql);
+            return $result;
+        } catch (Exception $e) {
+            Flight::json([
+                'error' => 'Erro durante a requisição: '.$e->getMessage(),
+            ], 500);
         }
-        return [];
     }
 
     static function getUser(int $id) {
         $sql = "SELECT * FROM users WHERE id = ?";
         try {
-            $user = Flight::db()->fetchRow($sql, [$id]);
-            return $user;
-        } catch (\Throwable $th) {
-            throw $th;
+            $result = Flight::db()->fetchRow($sql, [$id]);
+            if ($result == []) throw new Exception("Usuário não encontrado.");
+            return $result;
+        } catch (Exception $e) {
+            return [
+                'error' => 'Erro durante a requisição: '.$e->getMessage(),
+            ];
         }
-        return [];
     }
 
     static function createUser(array $data) {
@@ -39,8 +43,14 @@ class UserService {
         $fields[strlen($fields) - 1] = " ";
         $values[strlen($values) - 1] = " ";
         $sql = "INSERT INTO users ($fields) VALUES ($values)";
-        // var_dump($sql, $value);
-        Flight::db()->runQuery($sql, $value);
+        try {
+            Flight::db()->runQuery($sql, $value);
+            return ['message' => "O usuário foi criado com sucesso!"];
+        } catch (Exception $e) {
+            return [
+                'error' => 'Erro durante a criação: '.$e->getMessage(),
+            ];
+        }
     }
 
     static function updateUser(int $id, array $data) {
@@ -53,8 +63,15 @@ class UserService {
         $values[] = $id;
         $fields[strlen($fields) - 1] = " ";
         $sql = "UPDATE users SET $fields WHERE id = ?";
-        // var_dump($sql, $values);
-        Flight::db()->runQuery($sql, $values);
+        try {
+            Flight::db()->runQuery($sql, $values);
+            return ['message' => "O usuário com id = $id, foi atualizado com sucesso!"];
+        } catch (Exception $e) {
+            return [
+                'error' => 'Erro durante a atualização: '.$e->getMessage(),
+            ];
+        }
+        
     }
 
     static function deleteUser(int $id) {
@@ -62,9 +79,10 @@ class UserService {
         try {
             Flight::db()->runQuery($sql, [$id]);
             return ['message' => "O usuário com id = $id, foi deletado com sucesso!"];
-        } catch (\Throwable $th) {
-            throw $th;
+        } catch (Exception $e) {
+            return [
+                'error' => 'Erro durante a deleção: '.$e->getMessage(),
+            ];
         }
-        return ['message' => "Erro na hora de deletar!"];
     }
 }

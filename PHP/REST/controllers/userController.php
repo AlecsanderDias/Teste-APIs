@@ -2,40 +2,66 @@
 
 namespace Controllers;
 
+use Exception;
 use Services\UserService;
 use flight;
 use Models\User;
 
 class UserController {
     public function index(): void {
-        $users = UserService::getUsers();
-        Flight::json(['users' => $users]);
+        try {
+            $result = UserService::getUsers();
+            Flight::json($result, 200);
+        } catch (Exception $e) {
+            Flight::json([
+                'error' => 'Erro durante a operação: '.$e->getMessage(), 
+            ], 500);
+        }
     }
 
     public function show(string $id): void {
-        $user = UserService::getUser((int)$id);
-        Flight::json(['user' => $user]);
+        try {
+            $result = UserService::getUser((int)$id);
+            Flight::json($result, 200);
+        } catch (Exception $e) {
+            Flight::json([
+                'error' => 'Erro durante a operação: '.$e->getMessage(),
+            ], 500);
+        }
     }
 
-    public function create(): void {
-    
-    }
-    
     public function store(): void {
-        $data = Flight::request()->data;
-        UserService::createUser([...$data]);
-    }
-
-    public function edit(string $id): void {
-
+        try {
+            $data = Flight::request()->data;
+            $result = UserService::createUser([...$data]);
+            Flight::json($result, 201);
+        } catch (Exception $e) {
+            Flight::json([
+                'error' => 'Erro durante a operação: '.$e->getMessage(),
+            ], 500);
+        }
     }
 
     public function update(string $id): void {
-        $data = Flight::request()->data;
-        UserService::updateUser((int)$id, [...$data]);
+        try {
+            $data = Flight::request()->data;
+            $result = UserService::updateUser((int)$id, [...$data]);
+            Flight::json($result, 200);
+        } catch (Exception $e) {
+            Flight::json([
+                'error' => 'Erro durante a operação: '.$e->getMessage(),
+            ], 500);
+        }
     }
 
     public function destroy(string $id): void {
-        $message = UserService::deleteUser((int)$id);
+        try {
+            $result = UserService::deleteUser((int)$id);
+            Flight::json($result, 200);
+        } catch (Exception $e) {
+            Flight::json([
+                'error' => 'Erro durante a operação: '.$e->getMessage(),
+            ], 500);
+        }
     }
 }
