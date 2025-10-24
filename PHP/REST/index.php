@@ -1,5 +1,9 @@
 <?php
 
+use Controllers\CommentController;
+use Controllers\FollowController;
+use Controllers\LikeController;
+use Controllers\PostController;
 use flight\database\PdoWrapper;
 use Controllers\UserController;
 
@@ -27,18 +31,10 @@ Flight::register('db', PdoWrapper::class, [
     ]
 ]);
 
-
-// Flight::route('/users', function() {
-//     $users = Flight::db()->fetchAll("SELECT * FROM users;");
-//     foreach ($users as $user) {
-//         echo $user->name;
-//     }
-//     Flight::json([
-//         'message' => 'Grande sucesso',
-//         'Resultado' => $users
-//     ]);
-// });
-
 Flight::resource('/users', UserController::class, ['except' => ['create', 'edit']]);
+Flight::resource('/posts', PostController::class, ['except' => ['create', 'edit']]);
+Flight::resource('/likes', LikeController::class, ['except' => ['create', 'edit']]);
+Flight::resource('/comments', CommentController::class, ['except' => ['create', 'edit']]);
+Flight::resource('/follows', FollowController::class, ['except' => ['create', 'edit']]);
 
 Flight::start();
