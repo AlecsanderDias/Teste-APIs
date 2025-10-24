@@ -3,14 +3,14 @@
 namespace Controllers;
 
 use Exception;
-use Services\UserService;
+use Services\CommentService;
 use flight;
-use Models\User;
+use Models\Comment;
 
-class UserController {
+class CommentController {
     public function index(): void {
         try {
-            $result = UserService::getUsers();
+            $result = CommentService::getComments();
             Flight::json($result, 200);
         } catch (Exception $e) {
             Flight::json([
@@ -22,7 +22,7 @@ class UserController {
     public function show(string $id): void {
         try {
             if(!ctype_digit($id)) throw new Exception('Id inválido');
-            $result = UserService::getUser((int)$id);
+            $result = CommentService::getComment((int)$id);
             Flight::json($result, 200);
         } catch (Exception $e) {
             Flight::json([
@@ -34,7 +34,7 @@ class UserController {
     public function store(): void {
         try {
             $data = Flight::request()->data;
-            $result = UserService::createUser([...$data]);
+            $result = CommentService::createComment([...$data]);
             Flight::json($result, 201);
         } catch (Exception $e) {
             Flight::json([
@@ -47,7 +47,7 @@ class UserController {
         try {
             if(!ctype_digit($id)) throw new Exception('Id inválido');
             $data = Flight::request()->data;
-            $result = UserService::updateUser((int)$id, [...$data]);
+            $result = CommentService::updateComment((int)$id, [...$data]);
             Flight::json($result, 200);
         } catch (Exception $e) {
             Flight::json([
@@ -59,7 +59,7 @@ class UserController {
     public function destroy(string $id): void {
         try {
             if(!ctype_digit($id)) throw new Exception('Id inválido');
-            $result = UserService::deleteUser((int)$id);
+            $result = CommentService::deleteComment((int)$id);
             Flight::json($result, 200);
         } catch (Exception $e) {
             Flight::json([

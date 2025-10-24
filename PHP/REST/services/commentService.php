@@ -5,9 +5,9 @@ namespace Services;
 use Exception;
 use flight;
 
-class UserService {
-    static function getUsers() {
-        $sql = "SELECT * FROM users";
+class CommentService {
+    static function getComments() {
+        $sql = "SELECT * FROM comments";
         try {
             $result = Flight::db()->fetchAll($sql);
             return $result;
@@ -18,8 +18,8 @@ class UserService {
         }
     }
 
-    static function getUser(int $id) {
-        $sql = "SELECT * FROM users WHERE id = ?";
+    static function getComment(int $id) {
+        $sql = "SELECT * FROM comments WHERE id = ?";
         try {
             $result = Flight::db()->fetchRow($sql, [$id]);
             if(empty($result[0])) throw new Exception("Usuário não encontrado.");
@@ -31,7 +31,7 @@ class UserService {
         }
     }
 
-    static function createUser(array $data) {
+    static function createComment(array $data) {
         $value = [];
         $values = "";
         $fields = "";
@@ -42,7 +42,7 @@ class UserService {
         }
         $fields[strlen($fields) - 1] = " ";
         $values[strlen($values) - 1] = " ";
-        $sql = "INSERT INTO users ($fields) VALUES ($values)";
+        $sql = "INSERT INTO comments ($fields) VALUES ($values)";
         try {
             Flight::db()->runQuery($sql, $value);
             return ['message' => 'O usuário foi criado com sucesso!'];
@@ -53,7 +53,7 @@ class UserService {
         }
     }
 
-    static function updateUser(int $id, array $data) {
+    static function updateComment(int $id, array $data) {
         $fields = "";
         $values = [];
         foreach ($data as $key => $value) {
@@ -62,7 +62,7 @@ class UserService {
         };
         $values[] = $id;
         $fields[strlen($fields) - 1] = " ";
-        $sql = "UPDATE users SET $fields WHERE id = ?";
+        $sql = "UPDATE comments SET $fields WHERE id = ?";
         try {
             Flight::db()->runQuery($sql, $values);
             return ['message' => "O usuário com id = $id, foi atualizado com sucesso!"];
@@ -74,8 +74,8 @@ class UserService {
         
     }
 
-    static function deleteUser(int $id) {
-        $sql = "DELETE FROM users WHERE id = ?";
+    static function deleteComment(int $id) {
+        $sql = "DELETE FROM comments WHERE id = ?";
         try {
             Flight::db()->runQuery($sql, [$id]);
             return ['message' => "O usuário com id = $id, foi deletado com sucesso!"];
