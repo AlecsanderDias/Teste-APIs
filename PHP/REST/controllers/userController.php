@@ -7,6 +7,8 @@ use Services\UserService;
 use flight;
 use Models\User;
 
+use function PHPSTORM_META\type;
+
 class UserController {
     public function index(): void {
         try {
@@ -23,7 +25,7 @@ class UserController {
         try {
             if(!ctype_digit($id)) throw new Exception('Id inválido');
             $result = UserService::getUser((int)$id);
-            Flight::json($result, 200);
+            Flight::json($result->getAllAttributesAndValues(), 200);
         } catch (Exception $e) {
             Flight::json([
                 'error' => 'Erro durante a operação: '.$e->getMessage(),

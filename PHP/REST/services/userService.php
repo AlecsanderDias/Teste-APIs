@@ -4,6 +4,7 @@ namespace Services;
 
 use Exception;
 use flight;
+use Models\User;
 
 class UserService {
     static function getUsers() {
@@ -18,11 +19,12 @@ class UserService {
         }
     }
 
-    static function getUser(int $id) {
+    static function getUser(int $id): User|array {
         $sql = "SELECT * FROM users WHERE id = ?";
         try {
             $result = Flight::db()->fetchRow($sql, [$id]);
-            if(empty($result[0])) throw new Exception("Usuário não encontrado.");
+            if(empty($result)) throw new Exception("Usuário não encontrado.");
+            $result = new User(...$result);
             return $result;
         } catch (Exception $e) {
             return [
