@@ -4,25 +4,13 @@ namespace Services;
 
 use Exception;
 use flight;
+use Models\Comment;
 
 class CommentService {
-    static function getComments() {
+    static function getComments(): array {
         $sql = "SELECT * FROM comments";
         try {
             $result = Flight::db()->fetchAll($sql);
-            return $result;
-        } catch (Exception $e) {
-            Flight::json([
-                'error' => 'Erro durante a requisição: '.$e->getMessage(),
-            ], 500);
-        }
-    }
-
-    static function getComment(int $id) {
-        $sql = "SELECT * FROM comments WHERE id = ?";
-        try {
-            $result = Flight::db()->fetchRow($sql, [$id]);
-            if(empty($result[0])) throw new Exception("Usuário não encontrado.");
             return $result;
         } catch (Exception $e) {
             return [
@@ -31,7 +19,20 @@ class CommentService {
         }
     }
 
-    static function createComment(array $data) {
+    static function getComment(int $id): Comment|array {
+        $sql = "SELECT * FROM comments WHERE id = ?";
+        try {
+            $result = Flight::db()->fetchRow($sql, [$id]);
+            if(empty($result)) throw new Exception("Comentário não encontrado.");
+            return $result;
+        } catch (Exception $e) {
+            return [
+                'error' => 'Erro durante a requisição: '.$e->getMessage(),
+            ];
+        }
+    }
+
+    static function createComment(array $data): array {
         $value = [];
         $values = "";
         $fields = "";
@@ -45,7 +46,7 @@ class CommentService {
         $sql = "INSERT INTO comments ($fields) VALUES ($values)";
         try {
             Flight::db()->runQuery($sql, $value);
-            return ['message' => 'O usuário foi criado com sucesso!'];
+            return ['message' => 'O comentário foi criado com sucesso!'];
         } catch (Exception $e) {
             return [
                 'error' => 'Erro durante a criação: '.$e->getMessage(),
@@ -53,7 +54,7 @@ class CommentService {
         }
     }
 
-    static function updateComment(int $id, array $data) {
+    static function updateComment(int $id, array $data): array {
         $fields = "";
         $values = [];
         foreach ($data as $key => $value) {
@@ -65,7 +66,7 @@ class CommentService {
         $sql = "UPDATE comments SET $fields WHERE id = ?";
         try {
             Flight::db()->runQuery($sql, $values);
-            return ['message' => "O usuário com id = $id, foi atualizado com sucesso!"];
+            return ['message' => "O comentário com id = $id, foi atualizado com sucesso!"];
         } catch (Exception $e) {
             return [
                 'error' => 'Erro durante a atualização: '.$e->getMessage(),
@@ -74,11 +75,11 @@ class CommentService {
         
     }
 
-    static function deleteComment(int $id) {
+    static function deleteComment(int $id): array {
         $sql = "DELETE FROM comments WHERE id = ?";
         try {
             Flight::db()->runQuery($sql, [$id]);
-            return ['message' => "O usuário com id = $id, foi deletado com sucesso!"];
+            return ['message' => "O comentário com id = $id, foi deletado com sucesso!"];
         } catch (Exception $e) {
             return [
                 'error' => 'Erro durante a deleção: '.$e->getMessage(),

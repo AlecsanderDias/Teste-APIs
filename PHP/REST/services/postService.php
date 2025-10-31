@@ -4,25 +4,13 @@ namespace Services;
 
 use Exception;
 use flight;
+use Models\Post;
 
 class PostService {
-    static function getPosts() {
+    static function getPosts(): array {
         $sql = "SELECT * FROM posts";
         try {
             $result = Flight::db()->fetchAll($sql);
-            return $result;
-        } catch (Exception $e) {
-            Flight::json([
-                'error' => 'Erro durante a requisição: '.$e->getMessage(),
-            ], 500);
-        }
-    }
-
-    static function getPost(int $id) {
-        $sql = "SELECT * FROM posts WHERE id = ?";
-        try {
-            $result = Flight::db()->fetchRow($sql, [$id]);
-            if(empty($result[0])) throw new Exception("Usuário não encontrado.");
             return $result;
         } catch (Exception $e) {
             return [
@@ -31,7 +19,20 @@ class PostService {
         }
     }
 
-    static function createPost(array $data) {
+    static function getPost(int $id): Post|array {
+        $sql = "SELECT * FROM posts WHERE id = ?";
+        try {
+            $result = Flight::db()->fetchRow($sql, [$id]);
+            if(empty($result)) throw new Exception("Post não encontrado.");
+            return $result;
+        } catch (Exception $e) {
+            return [
+                'error' => 'Erro durante a requisição: '.$e->getMessage(),
+            ];
+        }
+    }
+
+    static function createPost(array $data): array {
         $value = [];
         $values = "";
         $fields = "";
@@ -45,7 +46,7 @@ class PostService {
         $sql = "INSERT INTO posts ($fields) VALUES ($values)";
         try {
             Flight::db()->runQuery($sql, $value);
-            return ['message' => 'O usuário foi criado com sucesso!'];
+            return ['message' => 'O post foi criado com sucesso!'];
         } catch (Exception $e) {
             return [
                 'error' => 'Erro durante a criação: '.$e->getMessage(),
@@ -53,7 +54,7 @@ class PostService {
         }
     }
 
-    static function updatePost(int $id, array $data) {
+    static function updatePost(int $id, array $data): array {
         $fields = "";
         $values = [];
         foreach ($data as $key => $value) {
@@ -65,7 +66,7 @@ class PostService {
         $sql = "UPDATE posts SET $fields WHERE id = ?";
         try {
             Flight::db()->runQuery($sql, $values);
-            return ['message' => "O usuário com id = $id, foi atualizado com sucesso!"];
+            return ['message' => "O post com id = $id, foi atualizado com sucesso!"];
         } catch (Exception $e) {
             return [
                 'error' => 'Erro durante a atualização: '.$e->getMessage(),
@@ -74,11 +75,11 @@ class PostService {
         
     }
 
-    static function deletePost(int $id) {
+    static function deletePost(int $id): array {
         $sql = "DELETE FROM posts WHERE id = ?";
         try {
             Flight::db()->runQuery($sql, [$id]);
-            return ['message' => "O usuário com id = $id, foi deletado com sucesso!"];
+            return ['message' => "O post com id = $id, foi deletado com sucesso!"];
         } catch (Exception $e) {
             return [
                 'error' => 'Erro durante a deleção: '.$e->getMessage(),
