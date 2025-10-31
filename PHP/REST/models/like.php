@@ -3,7 +3,7 @@
 namespace Models;
 use flight;
 
-class Post {
+class Like {
 
     public function __construct(
         private ?int $id,

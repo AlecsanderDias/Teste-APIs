@@ -7,15 +7,15 @@ use flight;
 use Models\User;
 
 class UserService {
-    static function getUsers() {
+    static function getUsers(): array {
         $sql = "SELECT * FROM users";
         try {
             $result = Flight::db()->fetchAll($sql);
             return $result;
         } catch (Exception $e) {
-            Flight::json([
+            return [
                 'error' => 'Erro durante a requisição: '.$e->getMessage(),
-            ], 500);
+            ];
         }
     }
 
@@ -33,7 +33,7 @@ class UserService {
         }
     }
 
-    static function createUser(array $data) {
+    static function createUser(array $data): array {
         $value = [];
         $values = "";
         $fields = "";
@@ -55,7 +55,7 @@ class UserService {
         }
     }
 
-    static function updateUser(int $id, array $data) {
+    static function updateUser(int $id, array $data): array {
         $fields = "";
         $values = [];
         foreach ($data as $key => $value) {
@@ -76,7 +76,7 @@ class UserService {
         
     }
 
-    static function deleteUser(int $id) {
+    static function deleteUser(int $id): array {
         $sql = "DELETE FROM users WHERE id = ?";
         try {
             Flight::db()->runQuery($sql, [$id]);

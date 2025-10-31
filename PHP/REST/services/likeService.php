@@ -4,25 +4,26 @@ namespace Services;
 
 use Exception;
 use flight;
+use Models\Like;
 
 class LikeService {
-    static function getLikes() {
+    static function getLikes(): array {
         $sql = "SELECT * FROM likes";
         try {
             $result = Flight::db()->fetchAll($sql);
             return $result;
         } catch (Exception $e) {
-            Flight::json([
+            return [
                 'error' => 'Erro durante a requisição: '.$e->getMessage(),
-            ], 500);
+            ];
         }
     }
 
-    static function getLike(int $id) {
+    static function getLike(int $id): Like|array {
         $sql = "SELECT * FROM likes WHERE id = ?";
         try {
             $result = Flight::db()->fetchRow($sql, [$id]);
-            if(empty($result[0])) throw new Exception("Usuário não encontrado.");
+            if(empty($result)) throw new Exception("Like não encontrado.");
             return $result;
         } catch (Exception $e) {
             return [
@@ -45,7 +46,7 @@ class LikeService {
         $sql = "INSERT INTO likes ($fields) VALUES ($values)";
         try {
             Flight::db()->runQuery($sql, $value);
-            return ['message' => 'O usuário foi criado com sucesso!'];
+            return ['message' => 'O like foi criado com sucesso!'];
         } catch (Exception $e) {
             return [
                 'error' => 'Erro durante a criação: '.$e->getMessage(),
@@ -65,7 +66,7 @@ class LikeService {
         $sql = "UPDATE likes SET $fields WHERE id = ?";
         try {
             Flight::db()->runQuery($sql, $values);
-            return ['message' => "O usuário com id = $id, foi atualizado com sucesso!"];
+            return ['message' => "O like com id = $id, foi atualizado com sucesso!"];
         } catch (Exception $e) {
             return [
                 'error' => 'Erro durante a atualização: '.$e->getMessage(),
@@ -78,7 +79,7 @@ class LikeService {
         $sql = "DELETE FROM likes WHERE id = ?";
         try {
             Flight::db()->runQuery($sql, [$id]);
-            return ['message' => "O usuário com id = $id, foi deletado com sucesso!"];
+            return ['message' => "O like com id = $id, foi deletado com sucesso!"];
         } catch (Exception $e) {
             return [
                 'error' => 'Erro durante a deleção: '.$e->getMessage(),
