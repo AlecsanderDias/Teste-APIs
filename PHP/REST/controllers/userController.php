@@ -7,8 +7,6 @@ use Services\UserService;
 use flight;
 use Models\User;
 
-use function PHPSTORM_META\type;
-
 class UserController {
     public function index(): void {
         try {

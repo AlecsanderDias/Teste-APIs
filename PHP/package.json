@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "php-rest": "php -S localhost:8080 -t ./rest"
+    "php-rest": "php -S localhost:8080 -t ./rest",
+    "php-graph": "php -S localhost:8080 -t ./graphql"
   },
   "keywords": [],
   "author": "",

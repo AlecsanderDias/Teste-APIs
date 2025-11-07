@@ -1,0 +1,6 @@
+{
+    "name": "alecsander/graph-ql",
+    "require": {
+        "webonyx/graphql-php": "^15.25"
+    }
+}
