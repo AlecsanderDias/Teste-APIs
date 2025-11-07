@@ -8,11 +8,8 @@ use flight\database\PdoWrapper;
 use Controllers\UserController;
 
 require './vendor/autoload.php';
-// require './database/database.php';
 
-// $controllerFolder = '//controllers//';
 Flight::path(__DIR__);
-
 
 $dir = dirname(__DIR__);
 $dotenv = Dotenv\Dotenv::createImmutable($dir);

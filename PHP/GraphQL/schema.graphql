@@ -1,0 +1,139 @@
+type Users {
+    id: Int!
+    name: String
+    surname: String
+    user_name: String
+    birth_date: String
+    gender: String
+    is_premium: Boolean
+    email: String
+    password: String
+    created_at: String
+    updated_at: String
+    deleted_at: String
+}
+
+type Post {
+    id: Int!
+    content: String
+    tags: String
+    created_at: String
+    updated_at: String
+    deleted_at: String
+    userId: Int
+}
+
+type Comment {
+    id: Int!
+    content: String
+    created_at: String
+    updated_at: String
+    deleted_at: String
+    userId: Int
+    postId: Int
+}
+
+type Like {
+    id: Int!
+    postId: Int
+    userId: Int
+}
+
+type Follow {
+    id: Int!
+    followerId: Int
+    followedId: Int
+}
+
+type Query {
+    teste(value: Int!): Int
+    user(id: Int!): Users
+    users: [Users!]!
+    post(id: Int!): Post
+    posts: [Post!]!
+    comment(id: Int!): Comment
+    comments: [Comment!]!
+    like(id: Int!): Like
+    likes: [Like!]!
+    follow(id: Int!): Follow
+    follows: [Follow!]!    
+}
+
+type Mutation {
+    createUser(
+        name: String,
+        surname: String,
+        user_name: String,
+        birth_date: String,
+        gender: String,
+        is_premium: Boolean,
+        email: String,
+        password: String
+    ): Users!
+    updateUser(
+        id: Int!,
+        name: String,
+        surname: String,
+        user_name: String,
+        birth_date: String,
+        gender: String,
+        is_premium: Boolean,
+        email: String,
+        password: String
+    ): Users!
+    deleteUser(
+        id: Int!
+    ): Users!
+    createPost(
+        content: String,
+        tags: String,
+        userId: Int
+    ): Post!
+    updatePost(
+        id: Int!,
+        content: String,
+        tags: String,
+        userId: Int
+    ): Post!
+    deletePost(
+        id: Int!
+    ): Post!
+    createComment(
+        content: String,
+        userId: Int,
+        postId: Int
+    ): Comment!
+    updateComment(
+        id: Int!
+        content: String,
+        userId: Int,
+        postId: Int
+    ): Comment!
+    deleteComment(
+        id: Int!
+    ): Comment!
+    createLike(
+        postId: Int
+        userId: Int
+    ): Like!
+    updateLike(
+        id: Int!
+        postId: Int
+        userId: Int
+    ): Like!
+    deleteLike(
+        id: Int!
+    ): Like!
+    createFollow(
+        followerId: Int
+        followedId: Int
+    ): Follow!
+    updateFollow(
+        id: Int!
+        followerId: Int
+        followedId: Int
+    ): Follow
+    deleteFollow(
+        id: Int!
+    ): Follow
+}
